@@ -13,16 +13,21 @@
   "keywords": [
     "connect",
     "middleware",
-    "gzip",
-    "compress"
+    "cachify"
   ],
   "author": "Damian Krzeminski <pirxpilot@code42day.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/code42day/connect-cachify-static/issues"
   },
+  "dependencies": {
+    "find": "~0",
+    "debug": "~0",
+    "connect": "~2"
+  },
   "devDependencies": {
     "jshint": "~2",
-    "mocha": "~1"
+    "mocha": "~1",
+    "should": "~1"
   }
 }

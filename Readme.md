@@ -6,6 +6,9 @@
 
 static (simpler and faster) variant of [connect-cachify][] middleware
 
+Works by running all hash calculations during application startup, which means that it won't handle
+dynamically generated files.
+
 ## Installation
 
 	  $ npm install connect-cachify-static
