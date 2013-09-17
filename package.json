@@ -1,0 +1,28 @@
+{
+  "name": "connect-cachify-static",
+  "version": "0.0.0",
+  "description": "static (simpler and faster) variant of connect-cachify middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "make lint test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:code42day/connect-cachify-static.git"
+  },
+  "keywords": [
+    "connect",
+    "middleware",
+    "gzip",
+    "compress"
+  ],
+  "author": "Damian Krzeminski <pirxpilot@code42day.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code42day/connect-cachify-static/issues"
+  },
+  "devDependencies": {
+    "jshint": "~2",
+    "mocha": "~1"
+  }
+}
