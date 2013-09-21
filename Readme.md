@@ -17,9 +17,9 @@ it won't handle dynamically generated files).
 
 ## Options
 
-`match` - regular expression that determines which files in `root` will be cachified, if omitted
+- `match` - regular expression that determines which files in `root` will be cachified, if omitted
   the usual suspects are included `.js`, `.css`, `.png`, `.jpg`, and `.gif`
-`control_headers` - if truthy, the middleware will strip `ETag` and `Last-Modified` headers from the
+- `control_headers` - if truthy, the middleware will strip `ETag` and `Last-Modified` headers from the
   response
 
 ## API
@@ -58,10 +58,9 @@ var cachifyStatic = require('connect-cachify-static');
 
 connect()
   .use(cachifyStatic(__dirname + '/public'), {
-    match: /\.js$/, // only javascript files
-    control_headers // strip E
+    match: /\.js$/ // only javascript files
   })
-// need static to actually server the file
+// need static to actually serve the file
 connect()
   .use(connect.static(__dirname + '/public'))
 ```
