@@ -1,6 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/code42day/connect-cachify-static.png)](http://travis-ci.org/code42day/connect-cachify-static)
-[![Dependency Status](https://gemnasium.com/code42day/connect-cachify-static.png)](https://gemnasium.com/code42day/connect-cachify-static)
-[![NPM version](https://badge.fury.io/js/connect-cachify-static.png)](http://badge.fury.io/js/connect-cachify-static)
+[![Build Status](https://img.shields.io/travis/code42day/connect-cachify-static.svg)](http://travis-ci.org/code42day/connect-cachify-static)
+[![Dependency Status](https://img.shields.io/gemnasium/code42day/connect-cachify-static.svg)](https://gemnasium.com/code42day/connect-cachify-static)
+[![NPM version](https://img.shields.io/npm/v/connect-cachify-static.svg)](http://badge.fury.io/js/connect-cachify-static)
 
 # connect-cachify-static
 
