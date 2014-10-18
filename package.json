@@ -21,9 +21,10 @@
     "url": "https://github.com/code42day/connect-cachify-static/issues"
   },
   "dependencies": {
+    "debug": "~0",
     "find": "~0",
-    "parseurl": "~1",
-    "debug": "~0"
+    "on-headers": "^1.0.0",
+    "parseurl": "~1"
   },
   "devDependencies": {
     "connect": ">=2",
