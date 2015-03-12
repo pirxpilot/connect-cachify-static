@@ -1,4 +1,9 @@
 
+1.1.2 / 2015-03-12
+==================
+
+ * fix: works correctly when no options are passed
+
 1.1.1 / 2015-03-12
 ==================
 
