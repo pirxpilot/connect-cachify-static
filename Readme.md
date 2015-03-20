@@ -10,6 +10,7 @@ Adds `Cache-Control: max-age=31536000` header to all requests with 'cachified' p
 based on the file content and calculated for all files during application startup (which means that
 it won't handle dynamically generated files).
 
+If you reference cachifieable resources from CSS files you probably also want to use [postcss-cachify].
 
 ## Installation
 
@@ -70,5 +71,6 @@ connect()
 MIT
 
 [connect]: http://www.senchalabs.org/connect
-[connect-cachify]: https://npmjs.org/package/connect-cachify
+[connect-cachify]: https://www.npmjs.com/package/connect-cachify
 [express]: http://expressjs.com
+[postcss-cachify]: https://www.npmjs.com/package/postcss-cachify
