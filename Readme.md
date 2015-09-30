@@ -47,9 +47,13 @@ body
   //- scripts
   script(src=cachify('/script/main.js'), defer)
 ```
-
 If you use cachify with [express][] the `cachify` method is added to `res.locals` and thus available
 directly in the views.
+
+### `filter(wildcard)`
+
+returns an array of cachified paths - uses [minimatch] to check which paths are matching the `wildcard`
+
 
 ## Usage
 
@@ -74,3 +78,4 @@ MIT
 [connect-cachify]: https://www.npmjs.com/package/connect-cachify
 [express]: http://expressjs.com
 [postcss-cachify]: https://www.npmjs.com/package/postcss-cachify
+[minimatch]: https://www.npmjs.com/package/minimatch

@@ -23,14 +23,15 @@
   "dependencies": {
     "debug": "~2",
     "find": "~0",
+    "minimatch": "^3.0.0",
     "on-headers": "^1.0.0",
     "parseurl": "~1"
   },
   "devDependencies": {
     "connect": ">=2",
     "jshint": "~2",
-    "mocha": "~1",
+    "mocha": "^2.3.3",
     "serve-static": "^1.7.0",
-    "should": "~4"
+    "should": "^7.1.0"
   }
 }
