@@ -11,7 +11,9 @@ var hashStore = require('../lib/hash-store');
 
 describe('hash store', function() {
 	var root = path.join(__dirname, 'fixtures');
-	var store = hashStore(root, /\.json$|\.css$/);
+	var store = hashStore(root, /\.json$|\.css$/, function(p, h) {
+		return ['/', h, p].join('');
+	});
 
 	it('finds all matching files', function() {
 		store.getHash('/texts/c.json').should.eql('d9f2a7baf3');
@@ -35,4 +37,27 @@ describe('hash store', function() {
 		should.not.exist(store.isHash());
 	});
 
+	describe('filter', function() {
+		it('should match existing files', function() {
+			var files = store.filter('/*.css');
+			should.exist(files);
+			files.should.have.length(1);
+			files[0].should.be.eql('/9a6f75849b/a.css');
+		});
+
+		it('should return empty array if nothing found', function() {
+			var files = store.filter('*.xyz');
+			should.exist(files);
+			files.should.have.length(0);
+		});
+
+		it('**/* should match all files', function() {
+			var files = store.filter('**/*');
+			should.exist(files);
+			files.should.have.length(2);
+			files[0].should.be.eql('/9a6f75849b/a.css');
+			files[1].should.be.eql('/d9f2a7baf3/texts/c.json');
+		});
+
+	});
 });

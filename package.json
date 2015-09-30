@@ -23,6 +23,7 @@
   "dependencies": {
     "debug": "~2",
     "find": "~0",
+    "minimatch": "^3.0.0",
     "on-headers": "^1.0.0",
     "parseurl": "~1"
   },
