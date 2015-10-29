@@ -22,6 +22,8 @@ If you reference cachifieable resources from CSS files you probably also want to
   the usual suspects are included `.js`, `.css`, `.png`, `.jpg`, and `.gif`
 - `control_headers` - if truthy, the middleware will strip `ETag` and `Last-Modified` headers from the
   response
+- `format` - function that creates cachified version of the URL - allowed values are `'path'`, `'name'`,
+  or the function that takes `path` and `hash` and creates cachified version of the file URL
 
 ## API
 
@@ -30,8 +32,28 @@ If you reference cachifieable resources from CSS files you probably also want to
 `path` URL of the resource to be cachified
 
 It should be called when generating HTML, CSS etc., in order to create a 'cachified' URL for the
-resource. `cachify` will replace `/path/to/the/file` with `/{prefix}/path/to/the/file` where `{prefix}`
-is a reasonably unique identifier generated based on the file content.
+resource. `cachify` will replace `/path/to/the/file` with cachified version incorporating reasonably unique `{prefix}` generated based on the file content.
+
+The specific format of the cachified version depends on the `format` parameter:
+
+- `path` *default*
+
+    `/path/to/the/file` -> `/{prefix}/path/to/the/file`
+
+- `name`
+
+    `/path/to/the/file` -> `/path/to/the/{prefix}- file`
+
+You can also pass a format function:
+
+````javascript
+// this is how default format is implemented
+function format(path, prefix) {
+  return '/' + prefix + path;
+}
+
+````
+
 
 Since using `cachify` will make the browsers to cache the resource for approximately 1 year we need
 to bust the cache whenever the resource content changes.
