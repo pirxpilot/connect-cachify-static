@@ -1,4 +1,10 @@
 
+1.3.0 / 2015-10-29
+==================
+
+ * add support for configuring cachified format
+ * simplify cachified name resolution
+
 1.2.0 / 2015-09-29
 ==================
 
