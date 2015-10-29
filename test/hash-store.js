@@ -12,7 +12,7 @@ var hashStore = require('../lib/hash-store');
 describe('hash store', function() {
 	var root = path.join(__dirname, 'fixtures');
 	var store = hashStore(root, /\.json$|\.css$/, function(p, h) {
-		return ['/', h, p].join('');
+		return h;
 	});
 
 	it('finds all matching files', function() {
@@ -28,13 +28,15 @@ describe('hash store', function() {
 		should.not.exist(store.getHash('/no/such/file'));
 	});
 
-	it('properly determines if hash is valid', function() {
-		store.isHash('d9f2a7baf3').should.be.eql(true);
-		store.isHash('9a6f75849b').should.be.eql(true);
+	it('returns paths for valid hashes', function() {
+		store.getPath('d9f2a7baf3').should.be.eql('/texts/c.json');
+		store.getPath('9a6f75849b').should.be.eql('/a.css');
+	});
 
-		should.not.exist(store.isHash('89cc14862c'));
-		should.not.exist(store.isHash('qqqq'));
-		should.not.exist(store.isHash());
+	it('returns empty for invalid hashes', function() {
+		should.not.exist(store.getPath('89cc14862c'));
+		should.not.exist(store.getPath('qqqq'));
+		should.not.exist(store.getPath());
 	});
 
 	describe('filter', function() {
@@ -42,7 +44,7 @@ describe('hash store', function() {
 			var files = store.filter('/*.css');
 			should.exist(files);
 			files.should.have.length(1);
-			files[0].should.be.eql('/9a6f75849b/a.css');
+			files[0].should.be.eql('9a6f75849b');
 		});
 
 		it('should return empty array if nothing found', function() {
@@ -55,8 +57,8 @@ describe('hash store', function() {
 			var files = store.filter('**/*');
 			should.exist(files);
 			files.should.have.length(2);
-			files[0].should.be.eql('/9a6f75849b/a.css');
-			files[1].should.be.eql('/d9f2a7baf3/texts/c.json');
+			files[0].should.be.eql('9a6f75849b');
+			files[1].should.be.eql('d9f2a7baf3');
 		});
 
 	});

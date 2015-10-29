@@ -15,7 +15,8 @@ describe('cachifyStatic custom config', function(){
 
     app.use(cachifyStatic(fixtures, {
       match: /\.css$|\.txt$/,
-      control_headers: true
+      control_headers: true,
+      format: 'name'
     }));
     app.use(serveStatic(fixtures));
 
@@ -30,11 +31,21 @@ describe('cachifyStatic custom config', function(){
   it('should serve static files', function(done){
     var url = cachifyStatic.cachify('/a.css');
 
-    url.should.be.eql('/9a6f75849b/a.css');
+    url.should.be.eql('/9a6f75849b-a.css');
 
     request(this.app)
     .get(url)
     .expect('1', done);
+  });
+
+  it('should serve static files from directories', function(done){
+    var url = cachifyStatic.cachify('/texts/b.txt');
+
+    url.should.be.eql('/texts/89cc14862c-b.txt');
+
+    request(this.app)
+    .get(url)
+    .expect('2', done);
   });
 
   it('should set cache headers', function(done){
