@@ -31,7 +31,7 @@ describe('cachifyStatic custom config', function(){
   it('should serve static files', function(done){
     var url = cachifyStatic.cachify('/a.css');
 
-    url.should.be.eql('/9a6f75849b-a.css');
+    url.should.be.eql('/ddb7875b4b-a.css');
 
     request(this.app)
     .get(url)
@@ -41,7 +41,7 @@ describe('cachifyStatic custom config', function(){
   it('should serve static files from directories', function(done){
     var url = cachifyStatic.cachify('/texts/b.txt');
 
-    url.should.be.eql('/texts/89cc14862c-b.txt');
+    url.should.be.eql('/texts/6eec13ab35-b.txt');
 
     request(this.app)
     .get(url)
@@ -95,7 +95,7 @@ describe('cachifyStatic default config', function(){
   it('should serve static files', function(done){
     var url = cachifyStatic.cachify('/a.css');
 
-    url.should.be.eql('/9a6f75849b/a.css');
+    url.should.be.eql('/ddb7875b4b/a.css');
 
     request(this.app)
     .get(url)
