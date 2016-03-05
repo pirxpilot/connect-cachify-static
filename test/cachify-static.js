@@ -31,7 +31,7 @@ describe('cachifyStatic custom config', function(){
   it('should serve static files', function(done){
     var url = cachifyStatic.cachify('/a.css');
 
-    url.should.be.eql('/ddb7875b4b-a.css');
+    url.should.be.eql('/B5S3beHW0s-a.css');
 
     request(this.app)
     .get(url)
@@ -41,10 +41,21 @@ describe('cachifyStatic custom config', function(){
   it('should serve static files from directories', function(done){
     var url = cachifyStatic.cachify('/texts/b.txt');
 
-    url.should.be.eql('/texts/6eec13ab35-b.txt');
+    url.should.be.eql('/texts/jpmbuwTqzU-b.txt');
 
     request(this.app)
     .get(url)
+    .expect('2', done);
+  });
+
+  it('should support integrity if needed', function(done){
+    var url = cachifyStatic.cachify('/texts/b.txt', true);
+
+    url.should.have.property('path', '/texts/jpmbuwTqzU-b.txt');
+    url.should.have.property('integrity', 'sha256-1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU=');
+
+    request(this.app)
+    .get(url.path)
     .expect('2', done);
   });
 
@@ -95,7 +106,7 @@ describe('cachifyStatic default config', function(){
   it('should serve static files', function(done){
     var url = cachifyStatic.cachify('/a.css');
 
-    url.should.be.eql('/ddb7875b4b/a.css');
+    url.should.be.eql('/B5S3beHW0s/a.css');
 
     request(this.app)
     .get(url)

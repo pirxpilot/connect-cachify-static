@@ -6,9 +6,9 @@ var hashStore = require('../lib/hash-store');
 
 // $ sha256sum test/fixtures*
 
-// 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b  fixtures/a.css
-// d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35  fixtures/texts/b.txt
-// 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce  fixtures/texts/c.json
+// 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52B5S3beHW0s  fixtures/a.css
+// d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a66jpmbuwTqzU  fixtures/texts/b.txt
+// 4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7eZAtRym0n84  fixtures/texts/c.json
 
 
 describe('hash store', function() {
@@ -18,8 +18,15 @@ describe('hash store', function() {
   });
 
   it('finds all matching files', function() {
-    store.getHash('/texts/c.json').should.eql('4729b49fce');
-    store.getHash('/a.css').should.eql('ddb7875b4b');
+    store.getHash('/texts/c.json').should.eql('ZAtRym0n84');
+    store.getHash('/a.css').should.eql('B5S3beHW0s');
+  });
+
+  it('finds all matching files', function() {
+    store.getHash('/texts/c.json', true).should.have
+      .property('integrity', 'sha256-TgdAhWK+24tgzgXB3s/jrRa3IjCWfeAfZAt+Rym0n84=');
+    store.getHash('/a.css', true).should.have
+      .property('integrity', 'sha256-a4ayc/80/OGda4BO/1o/V0etpOqiLx1JwB5S3beHW0s=');
   });
 
   it('ignores unmatched files', function() {
@@ -31,8 +38,8 @@ describe('hash store', function() {
   });
 
   it('returns paths for valid hashes', function() {
-    store.getPath('4729b49fce').should.be.eql('/texts/c.json');
-    store.getPath('ddb7875b4b').should.be.eql('/a.css');
+    store.getPath('ZAtRym0n84').should.be.eql('/texts/c.json');
+    store.getPath('B5S3beHW0s').should.be.eql('/a.css');
   });
 
   it('returns empty for invalid hashes', function() {
@@ -46,7 +53,7 @@ describe('hash store', function() {
       var files = store.filter('/*.css');
       should.exist(files);
       files.should.have.length(1);
-      files[0].should.be.eql('ddb7875b4b');
+      files[0].should.be.eql('B5S3beHW0s');
     });
 
     it('should return empty array if nothing found', function() {
@@ -59,8 +66,8 @@ describe('hash store', function() {
       var files = store.filter('**/*');
       should.exist(files);
       files.should.have.length(2);
-      files[0].should.be.eql('ddb7875b4b');
-      files[1].should.be.eql('4729b49fce');
+      files[0].should.be.eql('B5S3beHW0s');
+      files[1].should.be.eql('ZAtRym0n84');
     });
 
   });
