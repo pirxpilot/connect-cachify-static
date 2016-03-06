@@ -1,4 +1,10 @@
 
+1.4.0 / 2016-03-05
+==================
+
+ * add support for integrity parameter in cachify
+ * switch to sha256 algo to generate digest
+
 1.3.0 / 2015-10-29
 ==================
 
