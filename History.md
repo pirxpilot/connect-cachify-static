@@ -1,4 +1,9 @@
 
+1.4.1 / 2016-03-09
+==================
+
+ * fix `cachify` result for unknown paths when integrity param set
+
 1.4.0 / 2016-03-05
 ==================
 
