@@ -27,9 +27,11 @@ If you reference cachifieable resources from CSS files you probably also want to
 
 ## API
 
-### `cachify(path)`
+### `cachify(path, integrity)`
 
-`path` URL of the resource to be cachified
+- `path` - URL of the resource to be cachified
+- `integrity` - optional - if truthy cachify will generate a tuple `{ path, integrity }`, which can
+be used to format `<script>` and `<link>` elements with [subresource integrity][sri] support
 
 It should be called when generating HTML, CSS etc., in order to create a 'cachified' URL for the
 resource. `cachify` will replace `/path/to/the/file` with cachified version incorporating reasonably unique `{prefix}` generated based on the file content.
@@ -68,6 +70,11 @@ body
   #info(data-icon=cachify('/img/icon.png'))
   //- scripts
   script(src=cachify('/script/main.js'), defer)
+
+  //- scripts with SRI support
+  - var c = cachify('/script/main.js', true)
+  script(src=c.path, integrity=c.integrity, crossorigin='anonymous', defer)
+
 ```
 If you use cachify with [express][] the `cachify` method is added to `res.locals` and thus available
 directly in the views.
@@ -101,3 +108,4 @@ MIT
 [express]: http://expressjs.com
 [postcss-cachify]: https://www.npmjs.com/package/postcss-cachify
 [minimatch]: https://www.npmjs.com/package/minimatch
+[sri]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
