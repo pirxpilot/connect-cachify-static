@@ -1,4 +1,9 @@
 
+1.4.2 / 2016-12-24
+==================
+
+ * add .webp to the default list of cachified extentions
+
 1.4.1 / 2016-03-09
 ==================
 
