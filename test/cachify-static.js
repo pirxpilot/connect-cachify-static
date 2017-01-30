@@ -62,7 +62,7 @@ describe('cachifyStatic custom config', function(){
   it('should set cache headers', function(done){
     request(this.app)
     .get(cachifyStatic.cachify('/a.css'))
-    .expect('Cache-Control', 'public, max-age=31536000', done);
+    .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
   it('should strip other headers', function(done){
@@ -116,7 +116,7 @@ describe('cachifyStatic default config', function(){
   it('should set cache headers', function(done){
     request(this.app)
     .get(cachifyStatic.cachify('/a.css'))
-    .expect('Cache-Control', 'public, max-age=31536000', done);
+    .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
   it('should not strip other headers', function(done){
