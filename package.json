@@ -30,8 +30,8 @@
   "devDependencies": {
     "connect": ">=2",
     "jshint": "~2",
-    "mocha": "^2.3.3",
+    "mocha": "~3",
     "serve-static": "^1.7.0",
-    "should": "^7.1.0"
+    "should": "~11"
   }
 }
