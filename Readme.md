@@ -1,5 +1,5 @@
-[![Build Status](https://img.shields.io/travis/code42day/connect-cachify-static.svg)](http://travis-ci.org/code42day/connect-cachify-static)
-[![Dependency Status](https://img.shields.io/gemnasium/code42day/connect-cachify-static.svg)](https://gemnasium.com/code42day/connect-cachify-static)
+[![Build Status](https://img.shields.io/travis/pirxpilot/connect-cachify-static.svg)](http://travis-ci.org/pirxpilot/connect-cachify-static)
+[![Dependency Status](https://img.shields.io/gemnasium/pirxpilot/connect-cachify-static.svg)](https://gemnasium.com/pirxpilot/connect-cachify-static)
 [![NPM version](https://img.shields.io/npm/v/connect-cachify-static.svg)](http://badge.fury.io/js/connect-cachify-static)
 
 # connect-cachify-static

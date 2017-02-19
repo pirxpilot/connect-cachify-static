@@ -8,17 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:code42day/connect-cachify-static.git"
+    "url": "git@github.com:pirxpilot/connect-cachify-static.git"
   },
   "keywords": [
     "connect",
     "middleware",
     "cachify"
   ],
-  "author": "Damian Krzeminski <pirxpilot@code42day.com>",
+  "author": "Damian Krzeminski <pirxpilot@furkot.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/code42day/connect-cachify-static/issues"
+    "url": "https://github.com/pirxpilot/connect-cachify-static/issues"
   },
   "dependencies": {
     "debug": "~2",
