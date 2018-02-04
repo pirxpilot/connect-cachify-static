@@ -33,8 +33,13 @@
   "devDependencies": {
     "connect": ">=2",
     "jshint": "~2",
-    "mocha": "~3",
+    "mocha": "~5",
     "serve-static": "^1.7.0",
-    "should": "~11"
-  }
+    "should": "~13"
+  },
+  "files": [
+    "index.js",
+    "bin",
+    "lib"
+  ]
 }
