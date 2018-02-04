@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+// print our hashes in a format similar to md5sum or sha256sum
+
+var hash = require('../lib/hash');
+
+process.argv.slice(2).forEach(function(file) {
+  console.log(hash(file).value, file);
+});

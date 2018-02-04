@@ -6,6 +6,9 @@
   "scripts": {
     "test": "make lint test"
   },
+  "bin": {
+    "cachify-sum": "bin/cachify-sum"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:pirxpilot/connect-cachify-static.git"
