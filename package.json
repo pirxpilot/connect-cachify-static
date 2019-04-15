@@ -1,6 +1,6 @@
 {
   "name": "connect-cachify-static",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "static (simpler and faster) variant of connect-cachify middleware",
   "main": "index.js",
   "scripts": {
