@@ -14,8 +14,8 @@ const hashStore = require('../lib/hash-store');
 describe('hash store', function () {
   const root = path.resolve(__dirname, 'fixtures');
 
-  before(function() {
-    this.store = hashStore(root, /\.json$|\.css$/, function (p, h) {
+  before(async function() {
+    this.store = await hashStore(root, /\.json$|\.css$/, function (p, h) {
       return h;
     });
   });

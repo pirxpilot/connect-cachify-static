@@ -5,4 +5,4 @@
 const hash = require('../lib/hash');
 
 process.argv.slice(2)
-  .forEach(file => console.log(hash(file).value, file));
+  .forEach(async file => console.log(await hash(file).value, file));
