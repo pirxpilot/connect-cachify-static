@@ -1,6 +1,6 @@
-[![Build Status](https://img.shields.io/travis/pirxpilot/connect-cachify-static.svg)](http://travis-ci.org/pirxpilot/connect-cachify-static)
-[![Dependency Status](https://img.shields.io/gemnasium/pirxpilot/connect-cachify-static.svg)](https://gemnasium.com/pirxpilot/connect-cachify-static)
-[![NPM version](https://img.shields.io/npm/v/connect-cachify-static.svg)](http://badge.fury.io/js/connect-cachify-static)
+[![NPM version][npm-image]][npm-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][deps-image]][deps-url]
 
 # connect-cachify-static
 
@@ -109,3 +109,12 @@ MIT
 [postcss-cachify]: https://www.npmjs.com/package/postcss-cachify
 [minimatch]: https://www.npmjs.com/package/minimatch
 [sri]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
+
+[npm-image]: https://img.shields.io/npm/v/connect-cachify-static.svg
+[npm-url]: https://npmjs.org/package/connect-cachify-static
+
+[build-url]: https://github.com/pirxpilot/connect-cachify-static/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/workflow/status/pirxpilot/connect-cachify-static/check
+ 
+[deps-image]: https://img.shields.io/librariesio/release/npm/connect-cachify-static
+[deps-url]: https://libraries.io/npm/connect-cachify-static
