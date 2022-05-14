@@ -4,5 +4,6 @@
   "laxbreak": true,
   "laxcomma": true,
   "proto": true,
-  "node": true
+  "node": true,
+  "esversion": 11
 }
