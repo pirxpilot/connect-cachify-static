@@ -1,4 +1,10 @@
 
+2.0.0 / 2022-05-14
+==================
+
+ * replace find with @folder/readdir
+ * modernize sources
+
 1.6.1 / 2019-04-14
 ==================
 
