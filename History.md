@@ -1,4 +1,10 @@
 
+3.0.0 / 2022-05-16
+==================
+
+ * `filter` now takes String/function/regex param - use picomatch if you need shell wildcards
+ * `filter` and `cachify` functions are now accessible through async `helpers()`
+
 2.0.0 / 2022-05-14
 ==================
 
