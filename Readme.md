@@ -27,6 +27,9 @@ If you reference cachifieable resources from CSS files you probably also want to
 
 ## API
 
+`cachify` function is injected in res.locals and thus can be accessed from the template code.
+`cachify` and `filter` can be also retrieved by calling `await helpers()` on the initialized middleware instance
+
 ### `cachify(path, integrity)`
 
 - `path` - URL of the resource to be cachified
@@ -56,7 +59,6 @@ function format(path, prefix) {
 
 ````
 
-
 Since using `cachify` will make the browsers to cache the resource for approximately 1 year we need
 to bust the cache whenever the resource content changes.
 
@@ -76,12 +78,10 @@ body
   script(src=c.path, integrity=c.integrity, crossorigin='anonymous', defer)
 
 ```
-If you use cachify with [express][] the `cachify` method is added to `res.locals` and thus available
-directly in the views.
 
-### `filter(wildcard)`
+### `filter(patter)`
 
-returns an array of cachified paths - uses [minimatch] to check which paths are matching the `wildcard`
+returns an array of cachified paths matching pattern
 
 
 ## Usage

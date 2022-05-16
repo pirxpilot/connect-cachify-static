@@ -26,7 +26,6 @@
   "dependencies": {
     "@folder/readdir": "^3.1.0",
     "debug": "~2||~3||~4",
-    "minimatch": "~5",
     "on-headers": "^1.0.0",
     "parseurl": "~1"
   },

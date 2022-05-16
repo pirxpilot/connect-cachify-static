@@ -14,8 +14,8 @@ const hashStore = require('../lib/hash-store');
 describe('hash store', function () {
   const root = path.resolve(__dirname, 'fixtures');
 
-  before(function() {
-    this.store = hashStore(root, /\.json$|\.css$/, function (p, h) {
+  before(async function() {
+    this.store = await hashStore(root, /\.json$|\.css$/, function (p, h) {
       return h;
     });
   });
@@ -53,20 +53,20 @@ describe('hash store', function () {
 
   describe('filter', function () {
     it('should match existing files', function () {
-      const files = this.store.filter('/*.css');
+      const files = this.store.filter(f => f.endsWith('.css'));
       should.exist(files);
       files.should.have.length(1);
       files[0].should.be.eql('B5S3beHW0s');
     });
 
     it('should return empty array if nothing found', function () {
-      const files = this.store.filter('*.xyz');
+      const files = this.store.filter(/\.xyz$/);
       should.exist(files);
       files.should.have.length(0);
     });
 
     it('** should match all files', function () {
-      const files = this.store.filter('**/*');
+      const files = this.store.filter();
       should.exist(files);
       files.should.have.length(2);
       files[0].should.be.eql('B5S3beHW0s');
