@@ -110,7 +110,7 @@ MIT
 [minimatch]: https://www.npmjs.com/package/minimatch
 [sri]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 
-[npm-image]: https://img.shields.io/npm/v/connect-cachify-static.svg
+[npm-image]: https://img.shields.io/npm/v/connect-cachify-static
 [npm-url]: https://npmjs.org/package/connect-cachify-static
 
 [build-url]: https://github.com/pirxpilot/connect-cachify-static/actions/workflows/check.yaml
