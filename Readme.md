@@ -114,7 +114,7 @@ MIT
 [npm-url]: https://npmjs.org/package/connect-cachify-static
 
 [build-url]: https://github.com/pirxpilot/connect-cachify-static/actions/workflows/check.yaml
-[build-image]: https://img.shields.io/github/workflow/status/pirxpilot/connect-cachify-static/check
+[build-image]: https://img.shields.io/github/actions/workflow/status/pirxpilot/connect-cachify-static/check.yaml?branch=main
  
 [deps-image]: https://img.shields.io/librariesio/release/npm/connect-cachify-static
 [deps-url]: https://libraries.io/npm/connect-cachify-static

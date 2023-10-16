@@ -9,7 +9,10 @@
   "bin": {
     "cachify-sum": "bin/cachify-sum"
   },
-  "repository": "pirxpilot/connect-cachify-static",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirxpilot/connect-cachify-static.git"
+  },
   "keywords": [
     "connect",
     "middleware",
