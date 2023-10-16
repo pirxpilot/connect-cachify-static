@@ -23,8 +23,10 @@
   "bugs": {
     "url": "https://github.com/pirxpilot/connect-cachify-static/issues"
   },
+  "engines": {
+    "node": ">= 20.1.0"
+  },
   "dependencies": {
-    "@folder/readdir": "^3.1.0",
     "debug": "~2||~3||~4",
     "on-headers": "^1.0.0",
     "parseurl": "~1"
