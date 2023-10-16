@@ -1,4 +1,9 @@
 
+4.0.0 / 2023-10-16
+==================
+
+ * use built-in fs.readdir instead of @folder/readdir
+
 3.0.1 / 2023-10-16
 ==================
 
