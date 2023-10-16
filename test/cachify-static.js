@@ -1,3 +1,5 @@
+const { test } = require('node:test');
+
 const cachifyStatic = require('..');
 
 const connect = require('connect');
@@ -5,13 +7,12 @@ const serveStatic = require('serve-static');
 const fixtures = __dirname + '/fixtures';
 const request = require('./support/http');
 
+test('cachifyStatic custom config', async function (t) {
+  let app;
+  let helpers;
 
-/* global describe, it, before */
-
-
-describe('cachifyStatic custom config', function () {
-  before(async function () {
-    const app = connect();
+  t.before(async function () {
+    app = connect();
     const middleware = cachifyStatic(fixtures, {
       match: /\.css$|\.txt$/,
       control_headers: true,
@@ -26,73 +27,79 @@ describe('cachifyStatic custom config', function () {
       res.end('sorry!');
     });
 
-    this.app = app;
-    Object.assign(this, await middleware.helpers());
+    helpers = await middleware.helpers();
   });
 
-  it('should serve static files', function (done) {
-    const url = this.cachify('/a.css');
+  t.afterEach(function (t, fn) {
+    t.request.close(fn);
+  });
+
+  await t.test('should serve static files', function (t, done) {
+    const url = helpers.cachify('/a.css');
 
     url.should.be.eql('/B5S3beHW0s-a.css');
 
-    request(this.app)
+    t.request = request(app)
       .get(url)
       .expect('1', done);
   });
 
-  it('should serve static files from directories', function (done) {
-    const url = this.cachify('/texts/b.txt');
+  await t.test('should serve static files from directories', function (t, done) {
+    const url = helpers.cachify('/texts/b.txt');
 
     url.should.be.eql('/texts/jpmbuwTqzU-b.txt');
 
-    request(this.app)
+    t.request = request(app)
       .get(url)
       .expect('2', done);
   });
 
-  it('should support integrity if needed', function (done) {
-    const url = this.cachify('/texts/b.txt', true);
+  await t.test('should support integrity if needed', function (t, done) {
+    const url = helpers.cachify('/texts/b.txt', true);
 
     url.should.have.property('path', '/texts/jpmbuwTqzU-b.txt');
     url.should.have.property('integrity', 'sha256-1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU=');
 
-    request(this.app)
+    t.request = request(app)
       .get(url.path)
       .expect('2', done);
   });
 
-  it('should set cache headers', function (done) {
-    request(this.app)
-      .get(this.cachify('/a.css'))
+  await t.test('should set cache headers', function (t, done) {
+    t.request = request(app)
+      .get(helpers.cachify('/a.css'))
       .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
-  it('should strip other headers', function (done) {
-    request(this.app)
-      .get(this.cachify('/a.css'))
+  await t.test('should strip other headers', function (t, done) {
+    t.request = request(app)
+      .get(helpers.cachify('/a.css'))
       .end(function (res) {
         res.headers.should.not.have.property('etag');
         done();
       });
   });
 
-  it('should not mess not cachified files', function (done) {
-    request(this.app)
+  await t.test('should not mess not cachified files', function (t, done) {
+    t.request = request(app)
       .get('/texts/b.txt')
       .expect('2', done);
   });
 
-  it('should ignore wrong hashes', function (done) {
-    request(this.app)
+  await t.test('should ignore wrong hashes', function (t, done) {
+    t.request = request(app)
       .set('Accept-Encoding', 'gzip')
       .post('/0123456789/a.css')
       .expect(404, done);
   });
 });
 
-describe('cachifyStatic default config', function () {
-  before(async function () {
-    const app = connect();
+test('cachifyStatic default config', async function (t) {
+  let app;
+  let helpers;
+
+  t.before(async function () {
+    app = connect();
     const middleware = cachifyStatic(fixtures);
 
     app.use(middleware);
@@ -103,33 +110,35 @@ describe('cachifyStatic default config', function () {
       res.end('sorry!');
     });
 
-    this.app = app;
-    Object.assign(this, await middleware.helpers());
+    helpers = await middleware.helpers();
   });
 
-  it('should serve static files', function (done) {
-    const url = this.cachify('/a.css');
+  t.afterEach(function (t, fn) {
+    t.request.close(fn);
+  });
+
+  await t.test('should serve static files', function (t, done) {
+    const url = helpers.cachify('/a.css');
 
     url.should.be.eql('/B5S3beHW0s/a.css');
 
-    request(this.app)
+    t.request = request(app)
       .get(url)
       .expect('1', done);
   });
 
-  it('should set cache headers', function (done) {
-    request(this.app)
-      .get(this.cachify('/a.css'))
+  await t.test('should set cache headers', function (t, done) {
+    t.request = request(app)
+      .get(helpers.cachify('/a.css'))
       .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
-  it('should not strip other headers', function (done) {
-    request(this.app)
-      .get(this.cachify('/a.css'))
+  await t.test('should not strip other headers', function (t, done) {
+    t.request = request(app)
+      .get(helpers.cachify('/a.css'))
       .end(function (res) {
         res.headers.should.have.property('etag');
         done();
       });
   });
-
 });

@@ -72,6 +72,7 @@ Request.prototype.expect = function (body, fn) {
         fn();
     }
   });
+  return this;
 };
 
 Request.prototype.end = function (fn) {
@@ -108,4 +109,10 @@ Request.prototype.end = function (fn) {
   }
 
   return this;
+};
+
+Request.prototype.close = function (fn) {
+  const { server } = this;
+  delete this.server;
+  return server ? server.close(fn) : fn();
 };
