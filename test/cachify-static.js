@@ -1,4 +1,5 @@
 const { test } = require('node:test');
+const assert = require('node:assert/strict');
 
 const cachifyStatic = require('..');
 
@@ -37,7 +38,7 @@ test('cachifyStatic custom config', async function (t) {
   await t.test('should serve static files', function (t, done) {
     const url = helpers.cachify('/a.css');
 
-    url.should.be.eql('/B5S3beHW0s-a.css');
+    assert.equal(url, '/B5S3beHW0s-a.css');
 
     t.request = request(app)
       .get(url)
@@ -47,7 +48,7 @@ test('cachifyStatic custom config', async function (t) {
   await t.test('should serve static files from directories', function (t, done) {
     const url = helpers.cachify('/texts/b.txt');
 
-    url.should.be.eql('/texts/jpmbuwTqzU-b.txt');
+    assert.equal(url, '/texts/jpmbuwTqzU-b.txt');
 
     t.request = request(app)
       .get(url)
@@ -57,8 +58,8 @@ test('cachifyStatic custom config', async function (t) {
   await t.test('should support integrity if needed', function (t, done) {
     const url = helpers.cachify('/texts/b.txt', true);
 
-    url.should.have.property('path', '/texts/jpmbuwTqzU-b.txt');
-    url.should.have.property('integrity', 'sha256-1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU=');
+    assert.equal(url.path, '/texts/jpmbuwTqzU-b.txt');
+    assert.equal(url.integrity, 'sha256-1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU=');
 
     t.request = request(app)
       .get(url.path)
@@ -75,7 +76,7 @@ test('cachifyStatic custom config', async function (t) {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
       .end(function (res) {
-        res.headers.should.not.have.property('etag');
+        assert.ok(!('etag' in res.headers));
         done();
       });
   });
@@ -120,7 +121,7 @@ test('cachifyStatic default config', async function (t) {
   await t.test('should serve static files', function (t, done) {
     const url = helpers.cachify('/a.css');
 
-    url.should.be.eql('/B5S3beHW0s/a.css');
+    assert.equal(url, '/B5S3beHW0s/a.css');
 
     t.request = request(app)
       .get(url)
@@ -137,7 +138,7 @@ test('cachifyStatic default config', async function (t) {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
       .end(function (res) {
-        res.headers.should.have.property('etag');
+        assert.ok('etag' in res.headers);
         done();
       });
   });
