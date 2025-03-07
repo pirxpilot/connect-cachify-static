@@ -32,10 +32,9 @@
     "parseurl": "~1"
   },
   "devDependencies": {
-    "@pirxpilot/jshint": "^3.0.1",
-    "connect": ">=2",
-    "serve-static": "^1.7.0",
-    "should": "~13"
+    "@biomejs/biome": "^1.9.4",
+    "@pirxpilot/connect": "~4",
+    "serve-static": "^1.7.0"
   },
   "files": [
     "index.js",
