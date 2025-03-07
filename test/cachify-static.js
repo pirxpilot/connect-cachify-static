@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 
 const cachifyStatic = require('..');
 
-const connect = require('connect');
+const connect = require('@pirxpilot/connect');
 const serveStatic = require('serve-static');
 const fixtures = __dirname + '/fixtures';
 const request = require('./support/http');
