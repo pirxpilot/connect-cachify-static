@@ -1,8 +1,8 @@
 const assert = require('node:assert/strict');
-const { EventEmitter } = require('events');
+const { EventEmitter } = require('node:events');
 
 const methods = ['get', 'post', 'put', 'delete', 'head'];
-const http = require('http');
+const http = require('node:http');
 
 module.exports = request;
 
@@ -56,12 +56,13 @@ Request.prototype.expect = function (body, ...args) {
   const fn = args.pop();
   this.end(function (res) {
     switch (args.length) {
-      case 1:
+      case 1: {
         const header = res.headers[body.toLowerCase()];
         assert.equal(header.toLowerCase(), args[0].toLowerCase());
         break;
+      }
       default:
-        if ('number' == typeof body) {
+        if ('number' === typeof body) {
           assert.equal(res.statusCode, body);
         } else {
           assert.deepEqual(res.body, body);
@@ -91,7 +92,9 @@ Request.prototype.end = function (fn) {
     req.on('response', function (res) {
       let buf = '';
       res.setEncoding('utf8');
-      res.on('data', function (chunk) { buf += chunk; });
+      res.on('data', function (chunk) {
+        buf += chunk;
+      });
       res.on('end', function () {
         res.body = buf;
         fn(res);

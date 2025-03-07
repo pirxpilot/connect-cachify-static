@@ -40,9 +40,7 @@ test('cachifyStatic custom config', async function (t) {
 
     assert.equal(url, '/B5S3beHW0s-a.css');
 
-    t.request = request(app)
-      .get(url)
-      .expect('1', done);
+    t.request = request(app).get(url).expect('1', done);
   });
 
   await t.test('should serve static files from directories', function (t, done) {
@@ -50,9 +48,7 @@ test('cachifyStatic custom config', async function (t) {
 
     assert.equal(url, '/texts/jpmbuwTqzU-b.txt');
 
-    t.request = request(app)
-      .get(url)
-      .expect('2', done);
+    t.request = request(app).get(url).expect('2', done);
   });
 
   await t.test('should support integrity if needed', function (t, done) {
@@ -61,9 +57,7 @@ test('cachifyStatic custom config', async function (t) {
     assert.equal(url.path, '/texts/jpmbuwTqzU-b.txt');
     assert.equal(url.integrity, 'sha256-1HNeOiZeFu7gP1lxi5tdAwGcB9i2xR+Q2jpmbuwTqzU=');
 
-    t.request = request(app)
-      .get(url.path)
-      .expect('2', done);
+    t.request = request(app).get(url.path).expect('2', done);
   });
 
   await t.test('should set cache headers', function (t, done) {
@@ -82,16 +76,11 @@ test('cachifyStatic custom config', async function (t) {
   });
 
   await t.test('should not mess not cachified files', function (t, done) {
-    t.request = request(app)
-      .get('/texts/b.txt')
-      .expect('2', done);
+    t.request = request(app).get('/texts/b.txt').expect('2', done);
   });
 
   await t.test('should ignore wrong hashes', function (t, done) {
-    t.request = request(app)
-      .set('Accept-Encoding', 'gzip')
-      .post('/0123456789/a.css')
-      .expect(404, done);
+    t.request = request(app).set('Accept-Encoding', 'gzip').post('/0123456789/a.css').expect(404, done);
   });
 });
 
@@ -123,9 +112,7 @@ test('cachifyStatic default config', async function (t) {
 
     assert.equal(url, '/B5S3beHW0s/a.css');
 
-    t.request = request(app)
-      .get(url)
-      .expect('1', done);
+    t.request = request(app).get(url).expect('1', done);
   });
 
   await t.test('should set cache headers', function (t, done) {

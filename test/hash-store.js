@@ -1,6 +1,6 @@
 const { describe, it, before } = require('node:test');
 const assert = require('node:assert/strict');
-const path = require('path');
+const path = require('node:path');
 const hashStore = require('../lib/hash-store');
 
 // $ sha256sum test/fixtures*
@@ -110,6 +110,5 @@ describe('hash store', function () {
       assert.ok(files);
       assert.deepEqual(files.sort(), ['B5S3beHW0s', 'ZAtRym0n84']);
     });
-
   });
 });
