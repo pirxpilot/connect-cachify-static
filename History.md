@@ -1,4 +1,12 @@
 
+4.0.1 / 2025-03-07
+==================
+
+ * fix timing issue in tests
+ * fix cachify-sum
+ * use biome instead of jshint
+ * replace should with built-in `node:assert`
+
 4.0.0 / 2023-10-16
 ==================
 
