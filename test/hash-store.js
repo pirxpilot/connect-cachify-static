@@ -59,12 +59,10 @@ describe('hash store', function () {
       assert.equal(files.length, 0);
     });
 
-    it('** should match all files', function () {
+    it('should match all files', function () {
       const files = store.filter();
       assert.ok(files);
-      assert.equal(files.length, 2);
-      assert.equal(files[0], 'B5S3beHW0s');
-      assert.equal(files[1], 'ZAtRym0n84');
+      assert.deepEqual(files.sort(), ['B5S3beHW0s', 'ZAtRym0n84']);
     });
   });
 
@@ -105,7 +103,7 @@ describe('hash store', function () {
       assert.equal(files.length, 0);
     });
 
-    it('** should match all files', function () {
+    it('should match all files', function () {
       const files = store.filter();
       assert.ok(files);
       assert.deepEqual(files.sort(), ['B5S3beHW0s', 'ZAtRym0n84']);
