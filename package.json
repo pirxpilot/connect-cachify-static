@@ -28,14 +28,14 @@
     "node": ">= 20.1.0"
   },
   "dependencies": {
-    "debug": "~2||~3||~4",
+    "debug": "~4",
     "on-headers": "^1.0.0",
     "parseurl": "~1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.0",
+    "@biomejs/biome": "2.3.0",
     "@pirxpilot/connect": "~4",
-    "serve-static": "^1.7.0"
+    "serve-static": "~2"
   },
   "files": [
     "bin",
