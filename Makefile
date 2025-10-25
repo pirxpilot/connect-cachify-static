@@ -4,7 +4,7 @@ lint:
 	./node_modules/.bin/biome ci
 
 format:
-	./node_modules/.bin/biome format --write
+	./node_modules/.bin/biome check --write
 
 test:
 	node --test $(TEST_OPTS)

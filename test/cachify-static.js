@@ -1,18 +1,17 @@
-const { test } = require('node:test');
-const assert = require('node:assert/strict');
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import connect from '@pirxpilot/connect';
+import serveStatic from 'serve-static';
+import cachifyStatic from '../lib/cachify-static.js';
+import request from './support/http.js';
 
-const cachifyStatic = require('..');
+const fixtures = `${import.meta.dirname}/fixtures`;
 
-const connect = require('@pirxpilot/connect');
-const serveStatic = require('serve-static');
-const fixtures = __dirname + '/fixtures';
-const request = require('./support/http');
-
-test('cachifyStatic custom config', async function (t) {
+test('cachifyStatic custom config', async t => {
   let app;
   let helpers;
 
-  t.before(async function () {
+  t.before(async () => {
     app = connect();
     const middleware = cachifyStatic(fixtures, {
       match: /\.css$|\.txt$/,
@@ -23,7 +22,7 @@ test('cachifyStatic custom config', async function (t) {
     app.use(middleware);
     app.use(serveStatic(fixtures));
 
-    app.use(function (req, res) {
+    app.use((_req, res) => {
       res.statusCode = 404;
       res.end('sorry!');
     });
@@ -31,11 +30,11 @@ test('cachifyStatic custom config', async function (t) {
     helpers = await middleware.helpers();
   });
 
-  t.afterEach(function (t, fn) {
+  t.afterEach((t, fn) => {
     t.request.close(fn);
   });
 
-  await t.test('should serve static files', function (t, done) {
+  await t.test('should serve static files', (t, done) => {
     const url = helpers.cachify('/a.css');
 
     assert.equal(url, '/B5S3beHW0s-a.css');
@@ -43,7 +42,7 @@ test('cachifyStatic custom config', async function (t) {
     t.request = request(app).get(url).expect('1', done);
   });
 
-  await t.test('should serve static files from directories', function (t, done) {
+  await t.test('should serve static files from directories', (t, done) => {
     const url = helpers.cachify('/texts/b.txt');
 
     assert.equal(url, '/texts/jpmbuwTqzU-b.txt');
@@ -51,7 +50,7 @@ test('cachifyStatic custom config', async function (t) {
     t.request = request(app).get(url).expect('2', done);
   });
 
-  await t.test('should support integrity if needed', function (t, done) {
+  await t.test('should support integrity if needed', (t, done) => {
     const url = helpers.cachify('/texts/b.txt', true);
 
     assert.equal(url.path, '/texts/jpmbuwTqzU-b.txt');
@@ -60,42 +59,42 @@ test('cachifyStatic custom config', async function (t) {
     t.request = request(app).get(url.path).expect('2', done);
   });
 
-  await t.test('should set cache headers', function (t, done) {
+  await t.test('should set cache headers', (t, done) => {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
       .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
-  await t.test('should strip other headers', function (t, done) {
+  await t.test('should strip other headers', (t, done) => {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
-      .end(function (res) {
+      .end(res => {
         assert.ok(!('etag' in res.headers));
         done();
       });
   });
 
-  await t.test('should not mess not cachified files', function (t, done) {
+  await t.test('should not mess not cachified files', (t, done) => {
     t.request = request(app).get('/texts/b.txt').expect('2', done);
   });
 
-  await t.test('should ignore wrong hashes', function (t, done) {
+  await t.test('should ignore wrong hashes', (t, done) => {
     t.request = request(app).set('Accept-Encoding', 'gzip').post('/0123456789/a.css').expect(404, done);
   });
 });
 
-test('cachifyStatic default config', async function (t) {
+test('cachifyStatic default config', async t => {
   let app;
   let helpers;
 
-  t.before(async function () {
+  t.before(async () => {
     app = connect();
     const middleware = cachifyStatic(fixtures);
 
     app.use(middleware);
     app.use(serveStatic(fixtures));
 
-    app.use(function (req, res) {
+    app.use((_req, res) => {
       res.statusCode = 404;
       res.end('sorry!');
     });
@@ -103,11 +102,11 @@ test('cachifyStatic default config', async function (t) {
     helpers = await middleware.helpers();
   });
 
-  t.afterEach(function (t, fn) {
+  t.afterEach((t, fn) => {
     t.request.close(fn);
   });
 
-  await t.test('should serve static files', function (t, done) {
+  await t.test('should serve static files', (t, done) => {
     const url = helpers.cachify('/a.css');
 
     assert.equal(url, '/B5S3beHW0s/a.css');
@@ -115,16 +114,16 @@ test('cachifyStatic default config', async function (t) {
     t.request = request(app).get(url).expect('1', done);
   });
 
-  await t.test('should set cache headers', function (t, done) {
+  await t.test('should set cache headers', (t, done) => {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
       .expect('Cache-Control', 'public, max-age=31536000, immutable', done);
   });
 
-  await t.test('should not strip other headers', function (t, done) {
+  await t.test('should not strip other headers', (t, done) => {
     t.request = request(app)
       .get(helpers.cachify('/a.css'))
-      .end(function (res) {
+      .end(res => {
         assert.ok('etag' in res.headers);
         done();
       });
