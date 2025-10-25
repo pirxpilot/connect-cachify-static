@@ -1,4 +1,13 @@
 
+5.0.0 / 2025-10-25
+==================
+
+ * add `wasm` to default set of extensions
+ * transition to ESM format
+ * upgrade `biome` to 2.3.0
+ * update github actions
+ * minor filter optimization
+
 4.0.1 / 2025-03-07
 ==================
 
