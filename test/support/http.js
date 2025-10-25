@@ -1,25 +1,22 @@
-const assert = require('node:assert/strict');
-const { EventEmitter } = require('node:events');
+import assert from 'node:assert/strict';
+import { EventEmitter } from 'node:events';
+import http from 'node:http';
 
 const methods = ['get', 'post', 'put', 'delete', 'head'];
-const http = require('node:http');
 
-module.exports = request;
-
-function request(app) {
+export default function request(app) {
   return new Request(app);
 }
 
 function Request(app) {
-  const self = this;
   this.data = [];
   this.header = {};
   this.app = app;
   if (!this.server) {
     this.server = http.Server(app);
-    this.server.listen(0, '0.0.0.0', function () {
-      self.addr = self.server.address();
-      self.listening = true;
+    this.server.listen(0, '0.0.0.0', () => {
+      this.addr = this.server.address();
+      this.listening = true;
     });
   }
 }
@@ -30,7 +27,7 @@ function Request(app) {
 
 Request.prototype.__proto__ = EventEmitter.prototype;
 
-methods.forEach(function (method) {
+methods.forEach(method => {
   Request.prototype[method] = function (path) {
     return this.request(method, path);
   };
@@ -54,7 +51,7 @@ Request.prototype.request = function (method, path) {
 
 Request.prototype.expect = function (body, ...args) {
   const fn = args.pop();
-  this.end(function (res) {
+  this.end(res => {
     switch (args.length) {
       case 1: {
         const header = res.headers[body.toLowerCase()];
@@ -74,8 +71,6 @@ Request.prototype.expect = function (body, ...args) {
 };
 
 Request.prototype.end = function (fn) {
-  const self = this;
-
   if (this.listening) {
     const req = http.request({
       method: this.method,
@@ -85,17 +80,17 @@ Request.prototype.end = function (fn) {
       headers: this.header
     });
 
-    this.data.forEach(function (chunk) {
+    this.data.forEach(chunk => {
       req.write(chunk);
     });
 
-    req.on('response', function (res) {
+    req.on('response', res => {
       let buf = '';
       res.setEncoding('utf8');
-      res.on('data', function (chunk) {
+      res.on('data', chunk => {
         buf += chunk;
       });
-      res.on('end', function () {
+      res.on('end', () => {
         res.body = buf;
         fn(res);
       });
@@ -103,8 +98,8 @@ Request.prototype.end = function (fn) {
 
     req.end();
   } else {
-    this.server.on('listening', function () {
-      self.end(fn);
+    this.server.on('listening', () => {
+      this.end(fn);
     });
   }
 

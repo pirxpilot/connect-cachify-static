@@ -1,1 +1,1 @@
-module.exports = require('./lib/cachify-static');
+export default require('./lib/cachify-static');

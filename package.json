@@ -2,7 +2,8 @@
   "name": "connect-cachify-static",
   "version": "4.0.1",
   "description": "static (simpler and faster) variant of connect-cachify middleware",
-  "main": "index.js",
+  "exports": "./lib/cachify-static.js",
+  "type": "module",
   "scripts": {
     "test": "make lint test"
   },
@@ -37,7 +38,6 @@
     "serve-static": "^1.7.0"
   },
   "files": [
-    "index.js",
     "bin",
     "lib"
   ]
