@@ -1,6 +1,6 @@
 {
   "name": "connect-cachify-static",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "static (simpler and faster) variant of connect-cachify middleware",
   "exports": "./lib/cachify-static.js",
   "type": "module",
